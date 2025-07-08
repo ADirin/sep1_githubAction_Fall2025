@@ -20,8 +20,19 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      - name: Build with Maven
-        run: mvn clean install
+      - name: Build and Test with Maven
+        run: mvn clean test
 
-      - name: Run Java App
-        run: java -cp target/classes Hello
+      - name: Publish JUnit Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-test-results
+          path: target/surefire-reports/
+
+      - name: Publish Test Report to GitHub UI
+        if: always()
+        uses: dorny/test-reporter@v1
+        with:
+          name: JUnit Results
+          path: target/surefire-reports/TEST-*.xml
+          reporter: java-junit
