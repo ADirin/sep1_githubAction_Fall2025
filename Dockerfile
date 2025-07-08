@@ -5,4 +5,4 @@ FROM eclipse-temurin:17-jre
 COPY target/*.jar app.jar
 
 # Run the app
-ENTRYPOINT ["java", "-jar", "untitled-1.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
