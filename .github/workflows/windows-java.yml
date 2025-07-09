@@ -50,10 +50,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Debug tag
+        run: |
+          echo "Tag: ${{ secrets.DOCKERHUB_USERNAME }}/my-java-app:latest"
+
       - name: Build and Push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/my-java-app:latest
-
